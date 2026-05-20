@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Wallet, CheckCircle2, Shield, Layers, Star, Menu, X, ChevronRight, PieChart, Coins, TrendingUp, Compass, Target, Milestone } from 'lucide-react';
+import { ArrowRight, Wallet, CheckCircle2, Shield, Menu, X, ChevronRight, PieChart, Coins, TrendingUp, Milestone } from 'lucide-react';
 
 export default function App() {
   const [walletConnected, setWalletConnected] = useState(false);
