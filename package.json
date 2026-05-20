@@ -1,3 +1,14 @@
+  {
+  "name": "presale-clean",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@formspree/react": "latest",
     "@rainbow-me/rainbowkit": "^2.2.11",
@@ -12,3 +23,12 @@
     "viem": "^2.50.4",
     "wagmi": "^3.6.15"
   },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^24.12.3"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
