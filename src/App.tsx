@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Wallet, CheckCircle2, Shield, Layers, Star, Menu, X, ChevronRight, PieChart, Coins, TrendingUp, HelpCircle } from 'lucide-react';
+import { ArrowRight, Wallet, CheckCircle2, Shield, Layers, Star, Menu, X, ChevronRight, PieChart, Coins, TrendingUp, Compass, Target, Milestone } from 'lucide-react';
 
 export default function App() {
   const [walletConnected, setWalletConnected] = useState(false);
@@ -49,6 +49,7 @@ export default function App() {
             <button onClick={() => scrollToSection('mechanics')} className="hover:text-orange-400 transition">How It Works</button>
             <button onClick={() => scrollToSection('phases')} className="hover:text-orange-400 transition">Presale Tiers</button>
             <button onClick={() => scrollToSection('tokenomics')} className="hover:text-orange-400 transition">Tokenomics</button>
+            <button onClick={() => scrollToSection('about')} className="hover:text-orange-400 transition">About Us</button>
             <button onClick={() => scrollToSection('whitelist')} className="hover:text-orange-400 transition text-orange-400 font-bold">Join Whitelist</button>
           </div>
 
@@ -74,6 +75,7 @@ export default function App() {
           <button onClick={() => scrollToSection('mechanics')} className="text-left py-2 border-b border-white/5 text-white/80">How It Works</button>
           <button onClick={() => scrollToSection('phases')} className="text-left py-2 border-b border-white/5 text-white/80">Presale Tiers</button>
           <button onClick={() => scrollToSection('tokenomics')} className="text-left py-2 border-b border-white/5 text-white/80">Tokenomics</button>
+          <button onClick={() => scrollToSection('about')} className="text-left py-2 border-b border-white/5 text-white/80">About Us</button>
           <button onClick={() => scrollToSection('whitelist')} className="text-left py-2 border-b border-white/5 text-orange-400 font-bold">Join Whitelist</button>
           <button 
             onClick={() => { handleConnectWallet(); setIsMenuOpen(false); }}
@@ -113,7 +115,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ECOSYSTEM MECHANICS SECTION */}
+      {/* ECOSYSTEM MECHANICS */}
       <section id="mechanics" className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Ecosystem Architecture</h2>
@@ -121,21 +123,21 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-2xl relative">
+          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
             <div className="w-12 h-12 bg-orange-500/10 text-orange-400 rounded-xl flex items-center justify-center mb-6 font-bold text-lg">1</div>
             <h3 className="text-xl font-bold mb-3">Multi-Vault Liquidity Routing</h3>
             <p className="text-sm text-white/50 leading-relaxed">
               Deposited assets are systematically deployed across automated index vaults. The core protocol aggregates top-tier decentralized pools to optimize native yields securely.
             </p>
           </div>
-          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-2xl relative">
+          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
             <div className="w-12 h-12 bg-orange-500/10 text-orange-400 rounded-xl flex items-center justify-center mb-6 font-bold text-lg">2</div>
             <h3 className="text-xl font-bold mb-3">Token Buyback & Deflation</h3>
             <p className="text-sm text-white/50 leading-relaxed">
               A fixed percentage of performance fees earned by our institutional-grade vaults is designated to continuously market-buy tokens, inducing natural supply scarcity.
             </p>
           </div>
-          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-2xl relative">
+          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-2xl">
             <div className="w-12 h-12 bg-orange-500/10 text-orange-400 rounded-xl flex items-center justify-center mb-6 font-bold text-lg">3</div>
             <h3 className="text-xl font-bold mb-3">Staking Rewards & Multipliers</h3>
             <p className="text-sm text-white/50 leading-relaxed">
@@ -189,7 +191,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* DETAILED TOKENOMICS SECTION */}
+      {/* TOKENOMICS */}
       <section id="tokenomics" className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4">Token Distribution Metrics</h2>
@@ -197,8 +199,6 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          
-          {/* Metrics Data Table */}
           <div className="space-y-4">
             <div className="p-6 bg-white/[0.01] border border-white/5 rounded-2xl flex items-center justify-between">
               <div className="flex items-center space-x-4">
@@ -234,7 +234,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Breakdown Allocations Info Box */}
           <div className="p-8 bg-gradient-to-b from-white/[0.02] to-transparent border border-white/5 rounded-2xl space-y-6">
             <h3 className="text-xl font-bold border-b border-white/5 pb-4">Token Distribution Breakdown</h3>
             <div className="space-y-3 text-sm">
@@ -249,7 +248,52 @@ export default function App() {
               <span>Core Development allocation parameters are automatically locked under multi-signature smart contract time locks to guarantee ecosystem health.</span>
             </div>
           </div>
+        </div>
+      </section>
 
+      {/* DEDICATED ABOUT US & MISSION SECTION */}
+      <section id="about" className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div>
+            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-white/5 border border-white/10 rounded-lg text-xs font-bold text-white/60 mb-4 tracking-wide uppercase">
+              ✨ About Elevate Protocols
+            </div>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">Our Vision for Decentralized Wealth Optimization</h2>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6">
+              Elevate Protocols was founded by an elite collective of smart-contract architects and quantitative analysts. We believe that professional yield generation shouldn't be restricted behind the closed doors of legacy financial institutions.
+            </p>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed">
+              Our mission is to build completely trustless, autonomous index infrastructure that enables global web3 participants to compound capital with high efficiency, industrial-grade security, and total structural transparency.
+            </p>
+          </div>
+
+          {/* Strategic Roadmap Sub-Layout */}
+          <div className="p-8 bg-white/[0.01] border border-white/5 rounded-3xl space-y-8">
+            <h3 className="text-xl font-bold tracking-tight border-b border-white/5 pb-4 flex items-center space-x-2">
+              <Milestone className="w-5 h-5 text-orange-400" />
+              <span>Strategic Implementation Roadmap</span>
+            </h3>
+
+            <div className="space-y-6 relative border-l border-white/10 pl-6 ml-2">
+              <div className="relative">
+                <div className="absolute -left-[31px] top-1 w-3 h-3 bg-orange-500 rounded-full ring-4 ring-orange-500/20"></div>
+                <h4 className="font-bold text-sm text-orange-400 uppercase tracking-wider">Phase 1: Token Genesis & Audit</h4>
+                <p className="text-xs text-white/50 mt-1 leading-relaxed">Deploy smart contract matrices across target chains and finalize complete security verification through leading independent audit teams.</p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-[31px] top-1 w-3 h-3 bg-white/20 rounded-full"></div>
+                <h4 className="font-bold text-sm text-white/80 uppercase tracking-wider">Phase 2: Decentralized Index Launch</h4>
+                <p className="text-xs text-white/50 mt-1 leading-relaxed">Open mainnet liquidity vaults for active deposits, enabling native automated cross-pool compounding and live yield optimization tracking.</p>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-[31px] top-1 w-3 h-3 bg-white/20 rounded-full"></div>
+                <h4 className="font-bold text-sm text-white/80 uppercase tracking-wider">Phase 3: Cross-Chain Yield Aggregation</h4>
+                <p className="text-xs text-white/50 mt-1 leading-relaxed">Integrate zero-knowledge messaging frameworks to seamlessly aggregate asset yields across secondary layer-2 execution networks smoothly.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -311,4 +355,17 @@ export default function App() {
               >
                 <span>Process Presale Application</span>
                 <ChevronRight className="w-4 h-4" />
- 
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/5 py-10 text-center text-xs text-white/30 tracking-tight">
+        &copy; {new Date().getFullYear()} Elevate Protocols. All ecosystem rights reserved. Infrastructure components audited.
+      </footer>
+
+    </div>
+  );
+}
