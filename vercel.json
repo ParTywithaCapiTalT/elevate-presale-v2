@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "public": true,
+  "name": "elevate-protocols",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "outputDirectory": "dist"
+}
