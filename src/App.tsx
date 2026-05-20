@@ -1,161 +1,249 @@
-;
+import React, { useState } from 'react';
+import { ArrowRight, Wallet, CheckCircle2, Shield, Layers, Star, Menu, X, ChevronRight } from 'lucide-react';
 
 export default function App() {
+  // Interactive State Engines
+  const [walletConnected, setWalletConnected] = useState(false);
+  const [walletAddress, setWalletAddress] = useState('');
+  const [selectedPhase, setSelectedPhase] = useState('private');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Whitelist Form State
+  const [formData, setFormData] = useState({ name: '', email: '', address: '' });
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // Simulated Wallet Trigger
+  const handleConnectWallet = () => {
+    if (walletConnected) {
+      setWalletConnected(false);
+      setWalletAddress('');
+    } else {
+      setWalletConnected(true);
+      setWalletAddress('0x71C...3A9f');
+    }
+  };
+
+  // Form Submission Handler
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.email && formData.address) {
+      setFormSubmitted(true);
+    }
+  };
+
+  // Smooth Scroll Trigger
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
-    <div className="bg-slate-950 min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">EP</span>
-            </div>
-            <span className="text-white font-bold text-xl hidden sm:inline">Elevate Protocols</span>
+    <div className="min-h-screen bg-[#090d16] text-white selection:bg-orange-500 selection:text-white antialiased">
+      
+      {/* HEADER NAVIGATION */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#090d16]/80 backdrop-blur-md border-b border-white/5 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+            <span className="text-2xl font-black tracking-tighter bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">EP</span>
+            <span className="text-lg font-bold tracking-tight text-white/90">ELEVATE</span>
           </div>
 
-          <nav className="flex items-center gap-8">
-            <a href="#presale" className="text-white/80 hover:text-white transition-colors text-sm font-medium">Presale</a>
-            <a href="#tokenomics" className="text-white/80 hover:text-white transition-colors text-sm font-medium">Tokenomics</a>
-            <a href="#about" className="text-white/80 hover:text-white transition-colors text-sm font-medium">About</a>
-          </nav>
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-white/70">
+            <button onClick={() => scrollToSection('phases')} className="hover:text-orange-400 transition">Presale Phases</button>
+            <button onClick={() => scrollToSection('features')} className="hover:text-orange-400 transition">Tokenomics</button>
+            <button onClick={() => scrollToSection('whitelist')} className="hover:text-orange-400 transition">Join Whitelist</button>
+          </div>
 
-          <button className="px-6 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50 text-sm">
-            Join Whitelist
+          <div className="hidden md:flex items-center space-x-4">
+            <button 
+              onClick={handleConnectWallet}
+              className="flex items-center space-x-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-bold rounded-xl transition-all duration-200"
+            >
+              <Wallet className="w-4 h-4 text-orange-400" />
+              <span>{walletConnected ? walletAddress : 'Connect Wallet'}</span>
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-      </header>
+      </nav>
 
-      {/* Hero Section */}
-      <section className="relative w-full min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 overflow-hidden pt-20">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-radial from-orange-500/10 via-transparent to-transparent opacity-40" />
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-blue-500/10 to-transparent opacity-30 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-radial from-purple-500/10 to-transparent opacity-30 blur-3xl" />
+      {/* MOBILE DROP DOWN */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#090d16] pt-24 px-6 flex flex-col space-y-6 text-xl">
+          <button onClick={() => scrollToSection('phases')} className="text-left py-2 border-b border-white/5 text-white/80">Presale Phases</button>
+          <button onClick={() => scrollToSection('features')} className="text-left py-2 border-b border-white/5 text-white/80">Tokenomics</button>
+          <button onClick={() => scrollToSection('whitelist')} className="text-left py-2 border-b border-white/5 text-white/80 text-orange-400 font-bold">Join Whitelist</button>
+          <button 
+            onClick={() => { handleConnectWallet(); setIsMenuOpen(false); }}
+            className="w-full py-4 bg-orange-500 rounded-xl font-bold flex items-center justify-center space-x-2"
+          >
+            <Wallet className="w-5 h-5" />
+            <span>{walletConnected ? walletAddress : 'Connect Wallet'}</span>
+          </button>
         </div>
+      )}
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen px-6 sm:px-8 lg:px-12 py-12">
-          <div className="space-y-8 flex flex-col justify-center">
-            <div className="inline-block w-fit">
-              <div className="px-4 py-2 bg-gradient-to-r from-orange-500/20 to-orange-500/10 border border-orange-500/30 rounded-full">
-                <p className="text-sm font-semibold text-orange-300">🚀 PRIVATE WHITELIST</p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Build the
-                <br />
-                <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
-                  Future
-                </span>
-              </h1>
-            </div>
-
-            <div className="space-y-3">
-              <p className="text-lg sm:text-xl text-white/80 leading-relaxed max-w-xl">
-                Join the exclusive whitelist for Elevate Protocols. Early investors. Greater rewards.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-              {[
-                { icon: '🔒', label: 'Secure', desc: 'Smart contract audited' },
-                { icon: '📈', label: 'Elevated', desc: 'Premium index vaults' },
-                { icon: '✨', label: 'Exclusive', desc: 'Limited whitelist spots' },
-              ].map((feature, idx) => (
-                <div key={idx} className="bg-white/5 border border-white/10 rounded-lg p-4 backdrop-blur-sm hover:border-white/20 transition-colors">
-                  <div className="text-2xl mb-2">{feature.icon}</div>
-                  <p className="font-bold text-white text-sm mb-1">{feature.label}</p>
-                  <p className="text-xs text-white/60">{feature.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50">
-                Join Whitelist
-              </button>
-              <button className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm">
-                Learn More
-              </button>
-            </div>
-          </div>
-
-          <div className="hidden lg:flex items-center justify-center">
-            <div className="relative w-full h-96 bg-gradient-to-br from-orange-500/20 to-purple-500/20 rounded-2xl border border-white/10 flex items-center justify-center">
-              <div className="text-6xl">🏔️</div>
-            </div>
-          </div>
+      {/* HERO SECTION */}
+      <section className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <div className="inline-flex items-center space-x-2 px-4 py-1.5 bg-orange-500/10 border border-orange-500/20 rounded-full text-xs font-bold text-orange-400 mb-8 tracking-wide uppercase">
+          🚀 Private Whitelist Live
+        </div>
+        <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 max-w-4xl leading-tight">
+          Build the <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent">Future</span> of Elevated Finance
+        </h1>
+        <p className="text-base md:text-xl text-white/60 max-w-2xl mb-10 leading-relaxed">
+          Join the exclusive entry gateway for Elevate Protocols. Early backers secure maximum optimization rates, premium multi-vault access, and priority ecosystem allocations.
+        </p>
+        <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+          <button 
+            onClick={() => scrollToSection('whitelist')}
+            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg shadow-orange-500/20 flex items-center justify-center space-x-2 group"
+          >
+            <span>Secure Your Spot</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+          <button 
+            onClick={() => scrollToSection('phases')}
+            className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 font-semibold rounded-xl transition duration-200 text-center"
+          >
+            View Allocation Tiers
+          </button>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="relative w-full bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 py-20 px-6 sm:px-8 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-4">Token Sale Phases</h2>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto">Three strategic phases to build the future of elevated finance.</p>
+      {/* VALUE PROP FEATURE GRID */}
+      <section id="features" className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        {[
+          { icon: <Shield className="w-6 h-6 text-orange-400" />, title: "Fully Audited & Secure", desc: "Enterprise-grade smart contracts rigorously inspected to guarantee institutional security thresholds." },
+          { icon: <Layers className="w-6 h-6 text-orange-400" />, title: "Premium Index Vaults", desc: "Automated, hyper-efficient yield infrastructure routing capital to top decentralized liquidity pools." },
+          { icon: <Star className="w-6 h-6 text-orange-400" />, title: "Guaranteed Whitelist", desc: "Early phase participants receive hard-capped token price entries prior to public DEX generation events." }
+        ].map((feat, i) => (
+          <div key={i} className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl transition hover:border-white/10">
+            <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-4">{feat.icon}</div>
+            <h3 className="text-lg font-bold mb-2">{feat.title}</h3>
+            <p className="text-sm text-white/50 leading-relaxed">{feat.desc}</p>
           </div>
+        ))}
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { name: 'Private Seed', price: '$0.015', desc: 'Early access. Premium rates.' },
-              { name: 'Private Presale', price: '$0.025', desc: 'Whitelist priority access.', featured: true },
-              { name: 'Public ITO', price: '$0.040', desc: 'Public launch. Open to all.' },
-            ].map((tier, idx) => (
-              <div
-                key={idx}
-                className={`relative rounded-xl overflow-hidden transition-all duration-300 ${
-                  tier.featured
-                    ? 'bg-gradient-to-br from-white/10 to-white/5 border border-orange-500/30 shadow-lg shadow-orange-500/20 transform md:scale-105'
-                    : 'bg-white/5 border border-white/10 hover:border-white/20'
-                } backdrop-blur-xl p-8`}
+      {/* INTERACTIVE PRESALE PHASES */}
+      <section id="phases" className="max-w-7xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-3">Token Sale Allocation Phases</h2>
+          <p className="text-white/50 text-sm md:text-base">Select an ongoing phase allocation window to initiate initialization mapping.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { id: 'private', name: 'Private Seed', price: '$0.015', status: 'Whitelisting', cap: '50 ETH' },
+            { id: 'presale', name: 'Strategic Presale', price: '$0.025', status: 'Featured Tier', cap: '150 ETH' },
+            { id: 'public', name: 'Public ITO', price: '$0.040', status: 'Public Window', cap: '300 ETH' }
+          ].map((phase) => (
+            <div 
+              key={phase.id} 
+              onClick={() => setSelectedPhase(phase.id)}
+              className={`p-6 bg-white/[0.02] border rounded-2xl cursor-pointer transition-all duration-300 relative flex flex-col justify-between ${
+                selectedPhase === phase.id ? 'border-orange-500 ring-2 ring-orange-500/20 bg-orange-500/[0.01]' : 'border-white/5 hover:border-white/10'
+              }`}
+            >
+              {phase.id === 'presale' && (
+                <span className="absolute -top-3 right-4 px-2.5 py-1 bg-gradient-to-r from-orange-500 to-red-500 rounded-md text-[10px] font-black tracking-wider uppercase shadow-md">FEATURED</span>
+              )}
+              <div>
+                <span className="text-xs font-semibold text-orange-400 uppercase tracking-wider">{phase.status}</span>
+                <h3 className="text-xl font-bold mt-1 mb-4">{phase.name}</h3>
+                <div className="text-4xl font-black tracking-tight text-white mb-2">{phase.price}</div>
+                <p className="text-xs text-white/40">Soft/Hard Cap Threshold: {phase.cap}</p>
+              </div>
+              <button 
+                className={`mt-6 w-full py-3 rounded-xl font-bold text-sm transition-all duration-200 ${
+                  selectedPhase === phase.id ? 'bg-orange-500 text-white shadow-lg' : 'bg-white/5 text-white/70 hover:bg-white/10'
+                }`}
               >
-                {tier.featured && (
-                  <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full text-xs font-bold text-white">
-                    FEATURED
-                  </div>
-                )}
+                {selectedPhase === phase.id ? 'Selected Allocation' : 'Select Phase'}
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
 
-                <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
-                <div className="text-4xl font-bold text-orange-400 mb-4">{tier.price}</div>
-                <p className="text-sm text-white/60 mb-6">{tier.desc}</p>
+      {/* FORM AND PORTAL INTERACTION */}
+      <section id="whitelist" className="max-w-3xl mx-auto px-6 py-16 mb-20">
+        <div className="p-8 bg-gradient-to-b from-white/[0.04] to-transparent border border-white/5 rounded-3xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl -z-10"></div>
+          
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Apply for Priority Allocation</h2>
+            <p className="text-sm text-white/50">Submit your parameters to verify contract whitelist routing status.</p>
+          </div>
 
-                <button className={`w-full py-3 rounded-lg font-bold transition-all duration-300 ${
-                  tier.featured
-                    ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg hover:shadow-orange-500/50'
-                    : 'bg-white/10 hover:bg-white/20 border border-white/20 text-white'
-                }`}>
-                  Select Phase
-                </button>
+          {formSubmitted ? (
+            <div className="py-8 text-center flex flex-col items-center justify-center space-y-4">
+              <div className="w-16 h-16 bg-orange-500/10 border border-orange-500/20 rounded-full flex items-center justify-center text-orange-400">
+                <CheckCircle2 className="w-8 h-8" />
               </div>
-            ))}
-          </div>
+              <h3 className="text-xl font-bold text-white">Application Successfully Queued!</h3>
+              <p className="text-sm text-white/60 max-w-md">
+                Your wallet configuration address has been mapped to the <span className="text-orange-400 font-bold uppercase">{selectedPhase}</span> contract state tier. Verification will deploy via email shortly.
+              </p>
+              <button onClick={() => setFormSubmitted(false)} className="text-xs font-medium text-white/40 hover:text-white/60 underline pt-4">Submit another request</button>
+            </div>
+          ) : (
+            <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Selected Allocation Window</label>
+                <div className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm font-semibold capitalize text-orange-400 flex items-center justify-between">
+                  <span>{selectedPhase} Presale Tier</span>
+                  <span className="text-xs bg-white/5 px-2 py-1 rounded text-white/60">Auto-assigned</span>
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Email Identity Address</label>
+                <input 
+                  type="email" 
+                  required
+                  placeholder="investor@domain.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 rounded-xl text-sm text-white placeholder-white/20 outline-none transition"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/50 uppercase tracking-wider mb-2">Web3 Wallet Address (EVm Compatible)</label>
+                <input 
+                  type="text" 
+                  required
+                  placeholder="0x..."
+                  value={formData.address}
+                  onChange={(e) => setFormData({...formData, address: e.target.value})}
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 focus:border-orange-500 focus:ring-1 focus:ring-orange-500/20 rounded-xl text-sm text-white placeholder-white/20 outline-none transition"
+                />
+              </div>
+              <button 
+                type="submit"
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-xl transition duration-200 shadow-md flex items-center justify-center space-x-2 mt-6"
+              >
+                <span>Submit Application to State Router</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </form>
+          )}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative w-full bg-gradient-to-b from-slate-900 to-slate-950 py-20 px-6 sm:px-8 lg:px-12">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white">Ready to Join?</h2>
-          <p className="text-lg text-white/60">Apply to the whitelist and secure your spot in the Elevate Protocols presale.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50">
-              Learn More
-            </button>
-            <button className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm">
-              About Elevate
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10 bg-slate-950/50 py-12 px-6 sm:px-8 lg:px-12">
-        <div className="max-w-7xl mx-auto text-center text-sm text-white/40">
-          <p>© 2026 Elevate Protocols. All rights reserved.</p>
-        </div>
+      {/* FOOTER */}
+      <footer className="border-t border-white/5 py-8 text-center text-xs text-white/30 tracking-tight">
+        &copy; {new Date().getFullYear()} Elevate Protocols. All ecosystem rights reserved. Smart contracts audited and deployed.
       </footer>
+
     </div>
   );
 }
