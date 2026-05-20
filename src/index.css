@@ -1,4 +1,7 @@
-@import "tailwindcss";
+/* Aligned for Tailwind CSS v3 Engine */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
   margin: 0;
@@ -20,16 +23,6 @@ body {
   color: #ffffff;
 }
 
-/* Premium Dark Mode Styling */
-@layer base {
-  :root {
-    --color-slate-950: #0f172a;
-    --color-slate-900: #111827;
-    --color-orange-500: #f97316;
-    --color-orange-600: #ea580c;
-  }
-}
-
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -48,25 +41,66 @@ body {
   background: rgba(249, 115, 22, 0.7);
 }
 
-/* Premium Glassmorphic Cards */
+/* Custom Interactive Styling Layouts */
 @layer components {
   .glass-card {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg transition-all duration-300;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card:hover {
-    @apply border-white/20 shadow-lg;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-orange-400 via-orange-500 to-red-500 bg-clip-text text-transparent;
+    background: linear-gradient(to right, #fb923c, #f97316, #ef4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-orange-500/50;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(to right, #f97316, #ea580c);
+    color: #ffffff;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2);
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(to right, #ea580c, #c2410c);
+    box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.4);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    @apply px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-lg transition-all duration-300 backdrop-blur-sm;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
   }
 }
