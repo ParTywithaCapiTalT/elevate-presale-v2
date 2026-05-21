@@ -1,7 +1,4 @@
-/* Aligned for Tailwind CSS v3 Engine */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 * {
   margin: 0;
@@ -19,8 +16,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0f172a;
-  color: #ffffff;
 }
 
 /* Scrollbar Styling */
@@ -41,66 +36,18 @@ body {
   background: rgba(249, 115, 22, 0.7);
 }
 
-/* Custom Interactive Styling Layouts */
 @layer components {
   .glass-card {
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.5rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .gradient-text {
     background: linear-gradient(to right, #fb923c, #f97316, #ef4444);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
-    padding: 1rem 2rem;
-    background: linear-gradient(to right, #f97316, #ea580c);
-    color: #ffffff;
-    font-weight: 700;
-    border-radius: 0.5rem;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.2);
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(to right, #ea580c, #c2410c);
-    box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.4);
-    transform: translateY(-1px);
-  }
-
-  .btn-secondary {
-    display: inline-block;
-    cursor: pointer;
-    text-align: center;
-    padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
   }
 }
