@@ -1,4 +1,4 @@
-import { ArrowRight, Menu, X, Globe, MapPin, Shield, Users } from 'lucide-react';
+import { ArrowRight, Menu, X, Globe, MapPin } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import { useState } from 'react';
 
@@ -14,15 +14,18 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1c] text-white antialiased">
+    <div className="min-h-screen bg-[#070a12] text-white antialiased">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0f1c]/90 backdrop-blur-md border-b border-white/10 px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#070a12]/90 backdrop-blur-md border-b border-white/10 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <div className="w-9 h-9 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl flex items-center justify-center">
               <Globe className="w-5 h-5" />
             </div>
-            <span className="text-2xl font-black tracking-tighter">CURATE</span>
+            <div>
+              <span className="text-xl font-black tracking-tighter">HORIZON SIGHTS</span>
+              <p className="text-[10px] text-white/50 -mt-1">by Elevate Protocols</p>
+            </div>
           </div>
 
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -31,50 +34,47 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="relative pt-40 pb-24 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm mb-6">
-            <MapPin className="w-4 h-4 text-cyan-400" />
-            On-Chain × Real World
+            <MapPin className="w-4 h-4 text-orange-400" />
+            Real World × On-Chain
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-black leading-tight tracking-tighter mb-6">
-            Decentralized Data<br />
-            Curation Network
+          <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tighter mb-6">
+            Decentralized Data<br />Curation Network
           </h1>
           
-          <p className="text-xl text-white/70 mb-8 max-w-lg">
+          <p className="text-xl text-white/70 mb-10 max-w-lg">
             Where real-world exploration meets blockchain precision.
           </p>
 
           <button 
             onClick={() => scrollToSection('whitelist')} 
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-violet-600 rounded-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 transition-all"
+            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 active:scale-95 transition-all"
           >
-            Join the Network
+            Join Horizon Sights
             <ArrowRight className="w-6 h-6" />
           </button>
         </div>
 
         <div className="flex justify-center lg:justify-end">
-          <div className="relative">
-            <img 
-              src="/file_000000007d8071fb9152d675c2ba6ac7.png" 
-              alt="Curate Network" 
-              className="w-full max-w-lg object-contain" 
-            />
-          </div>
+          <img 
+            src="/file_000000007d8071fb9152d675c2ba6ac7.png" 
+            alt="Horizon Sights" 
+            className="w-full max-w-lg object-contain" 
+          />
         </div>
       </section>
 
-      {/* Whitelist / Application Section */}
+      {/* Application Section */}
       <section id="whitelist" className="max-w-3xl mx-auto px-6 py-20 border-t border-white/10">
         <div className="p-8 md:p-12 bg-white/[0.03] border border-white/10 rounded-3xl">
           {state.succeeded ? (
             <div className="text-center py-12">
               <h3 className="text-3xl font-bold mb-4">Application Received</h3>
-              <p className="text-white/70">Welcome to the Curate Network.</p>
+              <p className="text-white/70">Welcome to Horizon Sights — Elevate Protocols.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -107,7 +107,7 @@ export default function App() {
                 />
                 <select 
                   name="currency" 
-                  className="bg-white/10 px-4 rounded-2xl text-cyan-400 font-bold"
+                  className="bg-white/10 px-4 rounded-2xl text-orange-400 font-bold"
                 >
                   <option value="ETH">ETH</option>
                   <option value="USDT">USDT</option>
@@ -117,7 +117,7 @@ export default function App() {
               <button 
                 type="submit" 
                 disabled={state.submitting} 
-                className="w-full py-4 bg-gradient-to-r from-cyan-500 to-violet-600 rounded-2xl font-bold text-lg hover:brightness-110 transition"
+                className="w-full py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl font-bold text-lg hover:brightness-110 transition-all disabled:opacity-70"
               >
                 Apply for Early Access
               </button>
