@@ -7,13 +7,9 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [state, handleSubmit] = useForm("mdajeygv");
 
-  // You can keep these if you plan to use them soon, otherwise remove
   const [selectedPhase] = useState('private');
 
-  const handleConnectWallet = () => {
-    setWalletConnected(!walletConnected);
-    // setWalletAddress(walletConnected ? '' : '0x71C...3A9f');
-  };
+  // Removed unused handleConnectWallet function
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -29,6 +25,7 @@ export default function App() {
             <img src="/1778910090793.png" alt="Elevate Logo" className="w-9 h-9 object-contain" />
             <span className="text-xl font-black tracking-tight text-white/90">ELEVATE</span>
           </div>
+          
           <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -100,14 +97,4 @@ export default function App() {
               <button 
                 type="submit" 
                 disabled={state.submitting} 
-                className="w-full py-4 bg-orange-500 rounded-xl font-bold hover:bg-orange-600 transition-colors disabled:opacity-70"
-              >
-                Process Application
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
-    </div>
-  );
-}
+                className="w-full py-4 bg-orange-500 rounded-xl font-bold hover:bg-orange-
