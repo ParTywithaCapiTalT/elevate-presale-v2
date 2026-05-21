@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from 'tailwindcss'
+
 export default {
   content: [
     "./index.html",
@@ -17,13 +18,6 @@ export default {
           '600': '#ea580c',
         },
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      },
-      backdropBlur: {
-        'xl': '20px',
-      },
     },
   },
-  plugins: [],
-}
+} satisfies Config
