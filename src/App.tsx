@@ -34,7 +34,7 @@ export default function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative pt-40 pb-24 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm mb-6">
@@ -52,7 +52,7 @@ export default function App() {
 
           <button 
             onClick={() => scrollToSection('whitelist')} 
-            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 active:scale-95 transition-all"
+            className="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 transition-all"
           >
             Join Horizon Sights
             <ArrowRight className="w-6 h-6" />
@@ -68,7 +68,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Application Section */}
+      {/* Application Form */}
       <section id="whitelist" className="max-w-3xl mx-auto px-6 py-20 border-t border-white/10">
         <div className="p-8 md:p-12 bg-white/[0.03] border border-white/10 rounded-3xl">
           {state.succeeded ? (
@@ -105,10 +105,7 @@ export default function App() {
                   placeholder="0.00" 
                   className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl text-sm" 
                 />
-                <select 
-                  name="currency" 
-                  className="bg-white/10 px-4 rounded-2xl text-orange-400 font-bold"
-                >
+                <select name="currency" className="bg-white/10 px-4 rounded-2xl text-orange-400 font-bold">
                   <option value="ETH">ETH</option>
                   <option value="USDT">USDT</option>
                 </select>
