@@ -3,13 +3,9 @@ import { useForm, ValidationError } from '@formspree/react';
 import { useState } from 'react';
 
 export default function App() {
-  const [walletConnected, setWalletConnected] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [state, handleSubmit] = useForm("mdajeygv");
-
   const [selectedPhase] = useState('private');
-
-  // Removed unused handleConnectWallet function
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -21,12 +17,18 @@ export default function App() {
     <div className="min-h-screen bg-[#070a12] text-white antialiased">
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#070a12]/80 backdrop-blur-md border-b border-white/5 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+          <div 
+            className="flex items-center space-x-3 cursor-pointer" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
             <img src="/1778910090793.png" alt="Elevate Logo" className="w-9 h-9 object-contain" />
             <span className="text-xl font-black tracking-tight text-white/90">ELEVATE</span>
           </div>
           
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button 
+            className="md:hidden" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -97,4 +99,14 @@ export default function App() {
               <button 
                 type="submit" 
                 disabled={state.submitting} 
-                className="w-full py-4 bg-orange-500 rounded-xl font-bold hover:bg-orange-
+                className="w-full py-4 bg-orange-500 rounded-xl font-bold hover:bg-orange-600 transition-colors disabled:opacity-70"
+              >
+                Process Application
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
